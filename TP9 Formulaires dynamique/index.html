@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale 1.0">
+        <title>Accueil - Mon mini-site</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="page">
+        <header>
+            <h1>Mon mini-site web</h1>
+        </header>
+        <nav>
+            <a href="index.html">Accueil</a>
+            <a href="presentation.html">Présentation</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="container">
+            <main>
+                <h2>Bienvenue</h2>
+                <p>Ce site a été amélioré avec Flexbox pour une meilleure organisation.</p>
+            <section class="carte">
+            <h2>Message dynamique avec javaScript</h2>
+            <p>Cette zone permet d'afficher un Message personaliser a partir d'un nom saisi</p>
+            <label for="nomUtilisateur">Entrez votre nom :</label>
+            <input type="text" id="nomUtilisateur" placeholder="Exemple:Theophane">
+            <label for="domaineUtilisateur">Choisissez votre domaine d'interet:</label>
+            <select id="domaineUtilisateur">
+                <option value="maintenance">Maintenance informatique</option>
+                <option value="reseaux informatiques">reseaux informatiques</option>
+                <option value="cybersecurite">Cybersecurite</option>
+                <option value="Developpement web">Developpement web</option>
+                <option value="Administration systeme">Administration systeme</option>
+            </select>
+            <button onclick="afficherMessage()">Afficher le Message</button>
+             <button onclick="effacerMessage()">Effacer</button>
+            <p id="messageResultat"></p>
+            </section>
+        <section>
+            <h2>Laboratoire de manipulation du DOM</h2>
+            <P id="texteDynamique">Ce texte initial sera modifier avec le JavaScript.</P>
+            <button onclick="ChangerTexte()">Changer le texte</button>
+            <button onclick="ChangerCouleur()">Changer la couleur</button>
+            <button onclick="ChangerStyle()">Changer le Style complet</button>
+            <button onclick="masquerTexte()">Masquer</button>
+            <button onclick="afficherTexte()">Afficher</button>
+            <button onclick="reinitialiserTexte()">Reinitialiser</button>
+            </section>
+            <section class="carte">
+            <h2>Compteur interactif</h2>
+            <p>Ce Compteur montre comment JavaScript peut conserver et modifier une valeur.</p>
+            <p id="Compteur">0</p>
+            <button onclick="incrementer()">Augmenter</button>
+            <button onclick="decrementer()">Diminuer</button>
+            <button onclick="remettreCompteurAZero()">Remettre a zero</button>
+            </section>
+            <section class="carte">
+            <h2>Ajout dynamique dans une liste</h2>
+            <p> cette zone permet d'ajouter un equipement reseau dans une liste</p>
+            <label for="equipement">Nom de l'equipement</label>
+            <input type="text" id="equipement" placeholder="Exemple:Routeur R1">
+            <button onclick="ajouterEquipement()">ajouter</button>
+            <button onclick="validerListe()">Valider la liste</button>
+            <lu id="listeEquipements"></lu>
+            <p id="messageListe"></p>
+            </section>
+            <section class="carte">   
+            <h2>Modification dynamique d'une image</h2>
+            <p>Cette zone montre comment JavaScript peut modifier l'atribut src d'une image.</p>
+            <img id="imageDynamique" src="image/Profil.jpg"  alt="Image initiale" width="250">
+            <button onclick="afficherImageProfil()">afficher Image Profil</button>
+            <button onclick="afficherImageReseau()">Afficher afficher Image Reseau</button>
+            
+        </section>
+
+            </main>
+            <aside>
+                <h2>Informations</h2>
+                <p>Cette zone peut contenir des informations supplémentaires.</p>
+        
+        
+            </aside>
+        </div>
+        <footer>
+            <p>&copy; 2026 - Mon mini-site</p>
+        </footer>
+        </div>
+        <script>
+            function afficherMessage(){
+                let nom=document.getElementById("nomUtilisateur").value;
+                let domaine=document.getElementById("domaineUtilisateur").value;
+                let message="";
+                if(nom=== "" && domaine===""){
+                    message="Veuillez saisir votre nom et choisir un domaine";
+                }
+                else if(nom===""){
+                    message="Veuillez saisir votre nom.";
+                }
+                else if(domaine===""){
+                    message="Veuillez choisir un domaine d'interet";
+                }
+                else{
+                    message="Bienvenue" + nom + "Votre domaine d'interet est :" + domaine + ".";
+                }
+                document.getElementById("messageResultat").textContent = message;
+            }
+            function effacerMessage(){
+                document.getElementById("nomUtilisateur").value="";
+                document.getElementById("domaineUtlisateur").value="";
+                document.getElementById("messageResultat").textContent="";
+            }
+            </script>
+           <script>
+            function ChangerTexte(){
+                document.getElementById("texteDynamique").textContent="Le texte a ete modifier grace au DOM.";
+
+            }
+            function ChangerCouleur(){
+                document.getElementById("texteDynamique").style.color="red";
+            }
+            function ChangerStyle(){
+                let element=document.getElementById("texteDynamique");
+                element.style.color="white";
+                element.style.backgroundColor = "#0b3d91";
+                element.style.fontSize   =   "20px";
+                element.style.fontWeight   =   "bold";
+                element.style.padding  ="12px";
+                element.style.borderRadius   =   "8px";
+            }
+            function masquerTexte(){
+                document.getElementById("texteDynamique").style.display="none";
+            }
+            function afficherTexte(){
+                document.getElementById("texteDynamique").style.display   =   "block";
+            } function reinitialiserTexte(){
+               let element=document.getElementById("texteDynamique");
+               element.textContent ="Ce texte initial sera modifier avec JavaScript.";
+               element.style.color  =  "#222";
+               element.style.backgroundColor  =  "transparent";
+               element.style.fontSize  =  "16px";
+               element.style.fontWeight    =    "normal";
+               element.style.padding  =  "0";
+               element.style.borderRadius  =  "0";
+               element.style.display  ="block";
+            }
+            let valeurCompteur=0;
+            function incrementer(){
+                valeurCompteur=valeurCompteur  +  1;
+                document.getElementById("Compteur").textContent   =   valeurCompteur;
+            }
+            function decrementer(){
+                valeurCompteur  =  valeurCompteur  -  1;
+                document.getElementById("Compteur").textContent   =   valeurCompteur;
+            }
+            function remettreCompteurAZero(){
+                valeurCompteur  =  0;
+                document.getElementById("Compteur").textContent   =   valeurCompteur;
+            }
+            function ajouterEquipement (){
+                let champ  =  document.getElementById("equipement");
+                let nomEquipement  =  champ.value;
+                let message  =  document.getElementById("messageListe");
+                if   (nomEquipement   ===   ""){
+                    message.textContent  =  "Veuillez saisir le nom d'un equipement";
+                    message.style.color  =  "red";
+                }
+                else{
+                    let nouvelElement  =  document.createElement("li");
+                    nouvelElement.textContent = nomEquipement;
+                    document.getElementById("listeEquipement").appendChild(nouvelElement);
+                    message.textContent = "Equipement ajouter avec succes.";
+                    message.style.color = "green";
+                }
+            }
+            function viderListe (){
+               document.getElementById("listeEquipement").innerHTML = "";
+               document.getElementById("messageListe").textContent =  "La liste a ete videe";
+               document.getElementById("messageListe").style.color =  "#0b3d91"; 
+            }
+            function afficherImageProfil(){
+                let image = document.getElementById("imageDynamique");
+                image.src = "image/profil.jpg";
+                image.alt = "Image de profil";
+            }
+            function afficherImageReseau(){
+                let image = document.getElementById("imageDynamique");
+                image.src = "image/reseau.png";
+                image.alt  =  "Image representant un reseau informatique"
+            }
+           </script>
+    </body>
+</html>
